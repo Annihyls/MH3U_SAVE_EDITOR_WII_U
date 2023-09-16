@@ -29,7 +29,7 @@ ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, QWidget *parent) : QMainWindo
 
         for(int j=0; j < 100; j++)
         {
-            item = m_sdm->getItem(i * 100 + j);
+            item = m_sdm->getItem(SaveDataManager::ITEM_BOX, i * 100 + j);
 
             m_item_emplacement[i][j] = new QPushButton(QString("x%1").arg(item[1]), wdg);
             m_item_emplacement[i][j]->setIcon
@@ -71,12 +71,12 @@ ItemBoxWindow::~ItemBoxWindow()
 
 void ItemBoxWindow::changeItem(int id_emplacement)
 {
-    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, this, id_emplacement);
+    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, SaveDataManager::ITEM_BOX, this, id_emplacement);
     set_item_dialog->exec();
     delete set_item_dialog;
 
     //REFRESH
-    uint16_t *item = m_sdm->getItem(id_emplacement);
+    uint16_t *item = m_sdm->getItem(SaveDataManager::ITEM_BOX, id_emplacement);
     m_item_emplacement[id_emplacement/100][id_emplacement%100]->setIcon
     (
         QIcon

@@ -17,12 +17,13 @@ class ItemModifierWindow : public QDialog
     Q_OBJECT
 
 public:
-    ItemModifierWindow(SaveDataManager *sdm, Database *db, QWidget *parent, int id_emplacement);
+    ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, QWidget *parent, int id_emplacement);
     ~ItemModifierWindow();
 
 private:
     SaveDataManager *m_sdm;
     Database *m_db;
+    SaveDataManager::ItemMode m_mode;
 
     QVBoxLayout *m_mainLayout;
     QSpinBox *m_quantityInput;

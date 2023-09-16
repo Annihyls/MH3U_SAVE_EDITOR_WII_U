@@ -22,11 +22,20 @@ MainWindow::MainWindow(QWidget *parent)
     m_vLayoutLeft->addWidget(m_character);
     connect(m_character, SIGNAL(clicked(bool)), this, SLOT(characterWindow()));
 
+    m_inventory = new QPushButton(QString("Inventory"), m_mainWidget);
+    m_inventory->setEnabled(false);
+    m_vLayoutLeft->addWidget(m_inventory);
+    connect(m_inventory, SIGNAL(clicked(bool)), this, SLOT(inventoryWindow()));
+
+    m_pouch = new QPushButton(QString("Pouch"), m_mainWidget);
+    m_pouch->setEnabled(false);
+    m_vLayoutLeft->addWidget(m_pouch);
+    connect(m_pouch, SIGNAL(clicked(bool)), this, SLOT(pouchWindow()));
+
     m_item_box = new QPushButton(QString("Item Box"), m_mainWidget);
     m_item_box->setEnabled(false);
     m_vLayoutLeft->addWidget(m_item_box);
     connect(m_item_box, SIGNAL(clicked(bool)), this, SLOT(itemBoxWindow()));
-
 
     //Boutons à droite
     m_load_file = new QPushButton("Load file", m_mainWidget);
@@ -46,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete m_sdm;
 }
 
 void MainWindow::lireDonnees()
@@ -56,10 +66,16 @@ void MainWindow::lireDonnees()
         m_sdm->lire_donnees(file_path.toStdString());
         //Une fois un fichier chargé, on peut le modifier
 
+        //cette section pré-charge les fenêtres
         m_cw = new CharacterWindow(m_sdm, this);
         m_ibw = new ItemBoxWindow(m_sdm, this);
+        m_iw = new InventoryPouchWindow(m_sdm, this, SaveDataManager::ItemMode::INVENTORY);
+        m_pw = new InventoryPouchWindow(m_sdm, this, SaveDataManager::ItemMode::POUCH);
 
+        //on autorise l'accès aux bouttons
         m_character->setEnabled(true);
+        m_inventory->setEnabled(true);
+        m_pouch->setEnabled(true);
         m_item_box->setEnabled(true);
         m_save_file->setEnabled(true);
 
@@ -88,4 +104,18 @@ void MainWindow::itemBoxWindow()
     m_ibw->move(this->pos());
     m_ibw->activateWindow();
     m_ibw->show();
+}
+
+void MainWindow::inventoryWindow()
+{
+    m_iw->move(this->pos());
+    m_iw->activateWindow();
+    m_iw->show();
+}
+
+void MainWindow::pouchWindow()
+{
+    m_pw->move(this->pos());
+    m_pw->activateWindow();
+    m_pw->show();
 }

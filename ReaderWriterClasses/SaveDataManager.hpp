@@ -24,12 +24,20 @@
 #define POSITION_BYTE_TIME 0x4c
 #define SIZE_TIME 4 //octets
 
+#define POSITION_BYTE_INVENTORY 0xd0
+#define SIZE_INVENTORY 24 //24 objets stockable
+
+#define POSITION_BYTE_POUCH 0x130
+#define SIZE_POUCH 32 //32 objets stockable
+
 #define POSITION_BYTE_ITEM_BOX 0x1b0
 #define SIZE_ITEM_BOX 1000 //nb_objets stockable (1000)
 
 class SaveDataManager
 {
+
 public:
+    enum ItemMode{INVENTORY, POUCH, ITEM_BOX};
     //constructeurs
     SaveDataManager() = default;
 
@@ -43,7 +51,7 @@ public:
     uint32_t getArgent();
     uint32_t getRessource();
     uint32_t getTime();
-    uint16_t* getItem(int emplacement);
+    uint16_t* getItem(ItemMode mode, int emplacement);
 
 
     void setSex(bool new_sex);
@@ -52,7 +60,7 @@ public:
     void setArgent(unsigned long argent);
     void setRessource(unsigned long ressource);
     void setTime(unsigned long new_time);
-    void setItem(int emplacement, unsigned short id_item, unsigned short quantity);
+    void setItem(ItemMode mode, int emplacement, unsigned short id_item, unsigned short quantity);
 
 
 private:
@@ -64,6 +72,8 @@ private:
     uint32_t argent;                    //4 octets
     uint32_t ressource;                 //4 octets
     uint32_t time;                      //4 octets
+    uint32_t inventory[SIZE_INVENTORY]; //4 * 24 octets
+    uint32_t pouch[SIZE_POUCH];         //4 * 32 octets
     uint32_t item_box[SIZE_ITEM_BOX];   //4 octets * 1000
 
 

@@ -13,6 +13,7 @@ RC_ICONS = res\appico.ico
 
 SOURCES += \
     OtherWindows/CharacterWindow.cpp \
+    OtherWindows/InventoryPouchWindow.cpp \
     OtherWindows/ItemBoxWindow.cpp \
     OtherWindows/ItemModifierWindow.cpp \
     ReaderWriterClasses/Database.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     MainWindow.hpp \
     OtherWindows/CharacterWindow.hpp \
+    OtherWindows/InventoryPouchWindow.hpp \
     OtherWindows/ItemBoxWindow.hpp \
     OtherWindows/ItemModifierWindow.hpp \
     ReaderWriterClasses/Database.hpp \

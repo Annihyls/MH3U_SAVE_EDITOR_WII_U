@@ -3,6 +3,7 @@
 
 #include "OtherWindows/CharacterWindow.hpp"
 #include "OtherWindows/ItemBoxWindow.hpp"
+#include "OtherWindows/InventoryPouchWindow.hpp"
 #include "ReaderWriterClasses/SaveDataManager.hpp"
 
 #include <QMainWindow>
@@ -25,7 +26,9 @@ private Q_SLOTS:
     void lireDonnees();
     void ecrireDonnees();
     void characterWindow();
+    void inventoryWindow();
     void itemBoxWindow();
+    void pouchWindow();
 
 private:
     SaveDataManager *m_sdm;
@@ -41,9 +44,13 @@ private:
     QPushButton *m_save_file;
     QPushButton *m_character;
     QPushButton *m_item_box;
+    QPushButton *m_inventory;
+    QPushButton *m_pouch;
 
     CharacterWindow *m_cw;
     ItemBoxWindow *m_ibw;
+    InventoryPouchWindow *m_iw;
+    InventoryPouchWindow *m_pw;
 
 };
 #endif // MAINWINDOW_HPP

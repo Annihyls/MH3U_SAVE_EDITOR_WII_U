@@ -33,6 +33,10 @@
 #define POSITION_BYTE_ITEM_BOX 0x1b0
 #define SIZE_ITEM_BOX 1000 //nb_objets stockable (1000)
 
+
+#define POSITION_BYTE_EQ_BOX 0x1150
+#define SIZE_EQ_BOX 2000   //nb_objets stockable (1000) mais *2 car 1 equipment = 128 bits
+
 class SaveDataManager
 {
 
@@ -75,6 +79,7 @@ private:
     uint32_t inventory[SIZE_INVENTORY]; //4 * 24 octets
     uint32_t pouch[SIZE_POUCH];         //4 * 32 octets
     uint32_t item_box[SIZE_ITEM_BOX];   //4 octets * 1000
+    uint64_t eq_box[SIZE_EQ_BOX];       //8 * 2000 octets (= 16 * 1000 octets)
 
 
 };

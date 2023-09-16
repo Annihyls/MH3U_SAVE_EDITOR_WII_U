@@ -69,6 +69,12 @@ void SaveDataManager::lire_donnees(std::string file_path)
         ss.read((char*)&this->item_box[i], sizeof(uint32_t));
     }
 
+    ss.seekg(POSITION_BYTE_EQ_BOX, ss.beg);
+    for (int i = 0; i < SIZE_EQ_BOX; i++)
+    {
+        ss.read((char*)&this->eq_box[i], sizeof(uint64_t));
+    }
+
     ss.seekg(POSITION_BYTE_RESSOURCE, ss.beg);
     ss.read((char*)&this->ressource, SIZE_RESSOURCE);
 
@@ -153,7 +159,17 @@ void SaveDataManager::ecrire_donnees(std::string file_path)
         ss.write((char*)&this->item_box[i], sizeof(uint32_t));
     }
                                         //SIZE_ITEM_BOX * 4 car 1000 * 4 octets
-    for (int i = POSITION_BYTE_ITEM_BOX + (SIZE_ITEM_BOX * 4); i < POSITION_BYTE_HR; i++)
+    for (int i = POSITION_BYTE_ITEM_BOX + (SIZE_ITEM_BOX * 4); i < POSITION_BYTE_EQ_BOX; i++)
+    {
+        ss.write((char*)&this->savefile[i], sizeof(uint8_t));
+    }
+
+    //EQUIPMENT BOX WRITING
+    for (int i = 0; i < SIZE_EQ_BOX; i++)
+    {
+        ss.write((char*)&this->eq_box[i], sizeof(uint64_t));
+    }
+    for (int i = POSITION_BYTE_EQ_BOX + (SIZE_EQ_BOX * 8); i < POSITION_BYTE_HR; i++)
     {
         ss.write((char*)&this->savefile[i], sizeof(uint8_t));
     }

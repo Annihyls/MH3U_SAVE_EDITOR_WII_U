@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    m_sdm = new SaveDataManager();
+    m_sdm = NULL;
 
     m_mainWidget = new QWidget(this);
 
@@ -40,6 +40,10 @@ MainWindow::MainWindow(QWidget *parent)
     //Boutons à droite
     m_load_file = new QPushButton("Load file", m_mainWidget);
     m_save_file = new QPushButton("Save file", m_mainWidget);
+
+    m_load_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/load.ico"));
+    m_save_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/save.ico"));
+
     m_save_file->setEnabled(false);
     m_vLayoutRight->addWidget(m_load_file);
     m_vLayoutRight->addWidget(m_save_file);
@@ -63,8 +67,16 @@ void MainWindow::lireDonnees()
     QString file_path = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("user (*)"));
     if(!file_path.isEmpty())
     {
+        if(m_sdm != NULL)
+        {
+            delete m_cw;
+            delete m_ibw;
+            delete m_iw;
+            delete m_pw;
+            delete m_sdm;
+        }
+        m_sdm = new SaveDataManager();
         m_sdm->lire_donnees(file_path.toStdString());
-        //Une fois un fichier chargé, on peut le modifier
 
         //cette section pré-charge les fenêtres
         m_cw = new CharacterWindow(m_sdm, this);

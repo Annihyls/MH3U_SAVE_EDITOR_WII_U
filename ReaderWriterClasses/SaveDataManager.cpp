@@ -6,6 +6,12 @@
 #include <fstream>
 #include <sstream>
 
+
+SaveDataManager::~SaveDataManager()
+{
+
+}
+
 void SaveDataManager::lire_donnees(std::string file_path)
 {
     /*

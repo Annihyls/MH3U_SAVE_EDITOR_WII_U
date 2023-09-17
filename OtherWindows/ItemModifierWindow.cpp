@@ -98,7 +98,6 @@ void ItemModifierWindow::saveData()
 
 void ItemModifierWindow::closeEvent (QCloseEvent *event)
 {
-
     saveData();
     event->accept();
 }

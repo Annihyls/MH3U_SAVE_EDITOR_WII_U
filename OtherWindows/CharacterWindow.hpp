@@ -21,7 +21,7 @@ class CharacterWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    CharacterWindow(SaveDataManager *sdm, QWidget *parent);
+    CharacterWindow(SaveDataManager *sdm, Database *db, QWidget *parent);
     ~CharacterWindow();
 
 private:

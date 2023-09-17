@@ -4,8 +4,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    m_sdm = NULL;
-
     m_mainWidget = new QWidget(this);
 
     m_vLayoutLeft = new QVBoxLayout();
@@ -39,16 +37,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Boutons à droite
     m_load_file = new QPushButton("Load file", m_mainWidget);
-    m_save_file = new QPushButton("Save file", m_mainWidget);
-
     m_load_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/load.ico"));
-    m_save_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/save.ico"));
-
-    m_save_file->setEnabled(false);
-    m_vLayoutRight->addWidget(m_load_file);
-    m_vLayoutRight->addWidget(m_save_file);
     connect(m_load_file, SIGNAL(clicked(bool)), this, SLOT(lireDonnees()));
+    m_vLayoutRight->addWidget(m_load_file);
+
+    m_save_file = new QPushButton("Save file", m_mainWidget);
+    m_save_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/save.ico"));
+    m_save_file->setEnabled(false);
     connect(m_save_file, SIGNAL(clicked(bool)), this, SLOT(ecrireDonnees()));
+    m_vLayoutRight->addWidget(m_save_file);
+
+
+    m_option = new QPushButton(QString("Option"), m_mainWidget);
+    m_vLayoutRight->addWidget(m_option);
+    connect(m_option, SIGNAL(clicked(bool)), this, SLOT(optionWindow()));
 
     setCentralWidget(m_mainWidget);
     setMinimumWidth(320);
@@ -67,22 +69,11 @@ void MainWindow::lireDonnees()
     QString file_path = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("user (*)"));
     if(!file_path.isEmpty())
     {
-        if(m_sdm != NULL)
-        {
-            delete m_cw;
-            delete m_ibw;
-            delete m_iw;
-            delete m_pw;
-            delete m_sdm;
-        }
+        delete m_sdm;
         m_sdm = new SaveDataManager();
         m_sdm->lire_donnees(file_path.toStdString());
 
-        //cette section pré-charge les fenêtres
-        m_cw = new CharacterWindow(m_sdm, this);
-        m_ibw = new ItemBoxWindow(m_sdm, this);
-        m_iw = new InventoryPouchWindow(m_sdm, this, SaveDataManager::ItemMode::INVENTORY);
-        m_pw = new InventoryPouchWindow(m_sdm, this, SaveDataManager::ItemMode::POUCH);
+        loadWindowsAndDatabases();
 
         //on autorise l'accès aux bouttons
         m_character->setEnabled(true);
@@ -90,7 +81,6 @@ void MainWindow::lireDonnees()
         m_pouch->setEnabled(true);
         m_item_box->setEnabled(true);
         m_save_file->setEnabled(true);
-
     }
 
 }
@@ -130,4 +120,63 @@ void MainWindow::pouchWindow()
     m_pw->move(this->pos());
     m_pw->activateWindow();
     m_pw->show();
+}
+
+void MainWindow::optionWindow()
+{
+    m_ow = new Option(m_lang, this);
+    m_ow->move(this->pos());
+    m_ow->activateWindow();
+    m_ow->exec();
+    m_lang = m_ow->lang;
+    loadWindowsAndDatabases();
+    delete m_ow;
+}
+
+void MainWindow::loadWindowsAndDatabases()
+{
+    QString langue;
+    switch(m_lang)
+    {
+    case Option::Lang::FR:
+        langue = "fr";
+        m_character->setText("Personnage");
+        m_inventory->setText("Bourse Épéiste");
+        m_pouch->setText("Bourse Artilleur");
+        m_item_box->setText("Boite à Objet");
+        m_save_file->setText("Sauvegarder Fichier");
+        m_load_file->setText("Charger Fichier");
+        break;
+    case Option::Lang::EN:
+        langue = "en";
+        m_character->setText("Character");
+        m_inventory->setText("Inventory");
+        m_pouch->setText("Pouch");
+        m_item_box->setText("Item Box");
+        m_save_file->setText("Save file");
+        m_load_file->setText("Load file");
+        break;
+    }
+
+    //cette section pré-charge les fenêtres
+    //m_sdm ne doit pas être null !!!
+    if(m_sdm != nullptr)
+    {
+        delete m_cw;
+        delete m_ibw;
+        delete m_iw;
+        delete m_pw;
+
+        Database *db_item = new Database(
+            QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/item.txt").arg(langue).toStdString()
+            );
+        Database *db_sex = new Database(
+            QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/sex.txt").arg(langue).toStdString()
+            );
+
+        m_cw = new CharacterWindow(m_sdm, db_sex, this);
+        m_ibw = new ItemBoxWindow(m_sdm, db_item, this);
+        m_iw = new InventoryPouchWindow(m_sdm, db_item, this, SaveDataManager::ItemMode::INVENTORY);
+        m_pw = new InventoryPouchWindow(m_sdm, db_item, this, SaveDataManager::ItemMode::POUCH);
+    }
 }

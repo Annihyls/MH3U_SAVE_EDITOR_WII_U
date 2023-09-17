@@ -17,7 +17,7 @@ class ItemBoxWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    ItemBoxWindow(SaveDataManager *sdm, QWidget *parent);
+    ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent);
     ~ItemBoxWindow();
 
 public Q_SLOTS:

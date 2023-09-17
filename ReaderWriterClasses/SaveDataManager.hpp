@@ -44,6 +44,8 @@ public:
     enum ItemMode{INVENTORY, POUCH, ITEM_BOX};
     //constructeurs
     SaveDataManager() = default;
+    //destructeur
+    ~SaveDataManager();
 
     //methods
     void lire_donnees(std::string file_path);

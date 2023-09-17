@@ -16,6 +16,7 @@ SOURCES += \
     OtherWindows/InventoryPouchWindow.cpp \
     OtherWindows/ItemBoxWindow.cpp \
     OtherWindows/ItemModifierWindow.cpp \
+    OtherWindows/Option.cpp \
     ReaderWriterClasses/Database.cpp \
     ReaderWriterClasses/SaveDataManager.cpp \
     main.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     OtherWindows/InventoryPouchWindow.hpp \
     OtherWindows/ItemBoxWindow.hpp \
     OtherWindows/ItemModifierWindow.hpp \
+    OtherWindows/Option.hpp \
     ReaderWriterClasses/Database.hpp \
     ReaderWriterClasses/SaveDataManager.hpp
 

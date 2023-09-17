@@ -4,11 +4,9 @@
 #include <QSignalMapper>
 
 
-InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, QWidget *parent, SaveDataManager::ItemMode mode) :
-    QMainWindow(parent), m_sdm(sdm), m_mode(mode)
+InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, Database *db, QWidget *parent, SaveDataManager::ItemMode mode) :
+    QMainWindow(parent), m_sdm(sdm), m_mode(mode), m_db(db)
 {
-    m_db = new Database("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/en/item.txt");
-
     m_mainLayout = new QWidget(this);
     m_panel = new QTabWidget(this);
     m_vLayout = new QVBoxLayout(m_mainLayout);
@@ -18,14 +16,14 @@ InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, QWidget *parent
 
     switch(m_mode)
     {
-        case(SaveDataManager::ItemMode::INVENTORY):
-            m_maxPanel = 3;
-            setWindowTitle("Inventory Editor");
-            break;
-        default:
-            m_maxPanel = 4;
-            setWindowTitle("Pouch Editor");
-            break;
+    case(SaveDataManager::ItemMode::INVENTORY):
+        m_maxPanel = 3;
+        setWindowTitle("Inventory Editor");
+        break;
+    default:
+        m_maxPanel = 4;
+        setWindowTitle("Pouch Editor");
+        break;
     }
 
     QWidget *wdg;
@@ -69,7 +67,7 @@ InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, QWidget *parent
 InventoryPouchWindow::~InventoryPouchWindow()
 {
     this->m_sdm = NULL;
-    delete this->m_db;
+    this->m_db = NULL;
 }
 
 void InventoryPouchWindow::changeItem(int id_emplacement)

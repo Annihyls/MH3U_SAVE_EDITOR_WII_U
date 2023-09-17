@@ -5,6 +5,7 @@
 #include "OtherWindows/ItemBoxWindow.hpp"
 #include "OtherWindows/InventoryPouchWindow.hpp"
 #include "ReaderWriterClasses/SaveDataManager.hpp"
+#include "OtherWindows/Option.hpp"
 
 #include <QMainWindow>
 #include <QObject>
@@ -19,8 +20,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private Q_SLOTS:
     void lireDonnees();
@@ -29,9 +32,10 @@ private Q_SLOTS:
     void inventoryWindow();
     void itemBoxWindow();
     void pouchWindow();
+    void optionWindow();
 
 private:
-    SaveDataManager *m_sdm;
+    SaveDataManager *m_sdm = nullptr;
 
     QVBoxLayout *m_vLayoutLeft;
     QVBoxLayout *m_vLayoutRight;
@@ -46,11 +50,17 @@ private:
     QPushButton *m_item_box;
     QPushButton *m_inventory;
     QPushButton *m_pouch;
+    QPushButton *m_option;
 
-    CharacterWindow *m_cw;
-    ItemBoxWindow *m_ibw;
-    InventoryPouchWindow *m_iw;
-    InventoryPouchWindow *m_pw;
+    CharacterWindow *m_cw = nullptr;
+    ItemBoxWindow *m_ibw = nullptr;
+    InventoryPouchWindow *m_iw = nullptr;
+    InventoryPouchWindow *m_pw = nullptr;
+    Option *m_ow;
+
+    Option::Lang m_lang = Option::Lang::EN;
+
+    void loadWindowsAndDatabases();
 
 };
 #endif // MAINWINDOW_HPP

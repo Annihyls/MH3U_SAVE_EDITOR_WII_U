@@ -1,11 +1,9 @@
 #include "CharacterWindow.hpp"
 #include <QMessageBox>
 
-CharacterWindow::CharacterWindow(SaveDataManager *sdm, QWidget *parent) : QMainWindow(parent), m_sdm(sdm)
+CharacterWindow::CharacterWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_db(db)
 {
-    //Base de données repertoriant les différent sexe
-    m_db = new Database("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/en/sex.txt");
-
     m_mainLayout = new QWidget(this);
     m_vLayout = new QVBoxLayout(m_mainLayout);
     for(int i=0; i<NUMBER_OF_BUTTON; i++)
@@ -49,7 +47,7 @@ CharacterWindow::CharacterWindow(SaveDataManager *sdm, QWidget *parent) : QMainW
 CharacterWindow::~CharacterWindow()
 {
     this->m_sdm = NULL;
-    delete this->m_db;
+    this->m_db = NULL;
 
     for(int i=0; i<NUMBER_OF_BUTTON; i++)
     {

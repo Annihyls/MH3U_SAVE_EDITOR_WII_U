@@ -18,7 +18,7 @@ class InventoryPouchWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    InventoryPouchWindow(SaveDataManager *sdm, QWidget *parent, SaveDataManager::ItemMode mode);
+    InventoryPouchWindow(SaveDataManager *sdm, Database *db, QWidget *parent, SaveDataManager::ItemMode mode);
     ~InventoryPouchWindow();
 
 public Q_SLOTS:

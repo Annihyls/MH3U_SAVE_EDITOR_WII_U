@@ -4,13 +4,9 @@
 #include <QDebug>
 #include <QIcon>
 
-ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, QWidget *parent) : QMainWindow(parent), m_sdm(sdm)
+ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_db(db)
 {
-    /*
-     * Charge les données
-     */
-    m_db = new Database("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/en/item.txt");
-
     m_mainLayout = new QWidget(this);
 
     m_panel = new QTabWidget(this);
@@ -66,7 +62,7 @@ ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, QWidget *parent) : QMainWindo
 ItemBoxWindow::~ItemBoxWindow()
 {
     this->m_sdm = NULL;
-    delete this->m_db;
+    this->m_db = NULL;
 }
 
 void ItemBoxWindow::changeItem(int id_emplacement)

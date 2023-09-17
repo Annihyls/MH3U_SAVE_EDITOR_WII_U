@@ -17,7 +17,7 @@ class ItemModifierWindow : public QDialog
     Q_OBJECT
 
 public:
-    ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, QWidget *parent, int id_emplacement);
+    ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, int id_emplacement, QWidget *parent = nullptr);
     ~ItemModifierWindow();
 
 private:

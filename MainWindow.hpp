@@ -4,6 +4,7 @@
 #include "OtherWindows/CharacterWindow.hpp"
 #include "OtherWindows/ItemBoxWindow.hpp"
 #include "OtherWindows/InventoryPouchWindow.hpp"
+#include "OtherWindows/EquipmentBoxWindow.hpp"
 #include "ReaderWriterClasses/SaveDataManager.hpp"
 #include "OtherWindows/Option.hpp"
 
@@ -33,6 +34,7 @@ private Q_SLOTS:
     void itemBoxWindow();
     void pouchWindow();
     void optionWindow();
+    void eqBoxWindow();
 
 private:
     SaveDataManager *m_sdm = nullptr;
@@ -51,12 +53,14 @@ private:
     QPushButton *m_inventory;
     QPushButton *m_pouch;
     QPushButton *m_option;
+    QPushButton *m_eq_box;
 
     CharacterWindow *m_cw = nullptr;
     ItemBoxWindow *m_ibw = nullptr;
     InventoryPouchWindow *m_iw = nullptr;
     InventoryPouchWindow *m_pw = nullptr;
     Option *m_ow;
+    EquipmentBoxWindow *m_ebw = nullptr;
 
     Option::Lang m_lang = Option::Lang::EN;
 

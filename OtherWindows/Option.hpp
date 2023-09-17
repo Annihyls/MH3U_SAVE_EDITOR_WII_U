@@ -13,7 +13,7 @@ class Option : public QDialog
     Q_OBJECT
 public:
     enum Lang{EN, FR};
-    Option(Lang l, QWidget *parent);
+    Option(Lang l, QWidget *parent = nullptr);
     ~Option();
 
     Lang lang;

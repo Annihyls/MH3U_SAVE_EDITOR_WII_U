@@ -1,5 +1,5 @@
-#ifndef ITEMBOXWINDOW_HPP
-#define ITEMBOXWINDOW_HPP
+#ifndef EQUIPMENTBOXWINDOW_H
+#define EQUIPMENTBOXWINDOW_H
 
 #include "../ReaderWriterClasses/SaveDataManager.hpp"
 #include "../ReaderWriterClasses/Database.hpp"
@@ -11,17 +11,15 @@
 #include <QGridLayout>
 #include <QPushButton>
 
-
-class ItemBoxWindow : public QMainWindow
+class EquipmentBoxWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
-    ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent = nullptr);
-    ~ItemBoxWindow();
+    EquipmentBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent = nullptr);
+    ~EquipmentBoxWindow();
 
 private Q_SLOTS:
-    void changeItem(int id_emplacement);
+    void changeEq(int id_emplacement);
 
 private:
     SaveDataManager *m_sdm;
@@ -30,7 +28,7 @@ private:
     QWidget *m_mainLayout;
     QTabWidget *m_panel;
     QGridLayout *m_mainGridLayout;
-    QPushButton *m_item_emplacement[10][100];
+    QPushButton *m_eq_emplacement[10][100];
 };
 
-#endif // ITEMBOXWINDOW_HPP
+#endif // EQUIPMENTBOXWINDOW_H

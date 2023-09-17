@@ -269,6 +269,17 @@ uint16_t* SaveDataManager::getItem(ItemMode mode, int emplacement)
     return itemTab;
 }
 
+uint8_t SaveDataManager::getTypeEquipment(int emplacement)
+{
+    uint64_t equip;
+    uint8_t id;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    id = (uint8_t)(equip >> 56);
+    return id;
+}
+
+
+
 void SaveDataManager::setSex(bool new_sex)
 {
     if (new_sex == false)

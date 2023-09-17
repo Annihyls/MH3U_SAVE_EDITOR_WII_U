@@ -1,7 +1,6 @@
 #include "ItemBoxWindow.hpp"
 #include "OtherWindows/ItemModifierWindow.hpp"
 #include <QSignalMapper>
-#include <QDebug>
 #include <QIcon>
 
 ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
@@ -67,7 +66,7 @@ ItemBoxWindow::~ItemBoxWindow()
 
 void ItemBoxWindow::changeItem(int id_emplacement)
 {
-    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, SaveDataManager::ITEM_BOX, this, id_emplacement);
+    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, SaveDataManager::ITEM_BOX, id_emplacement, this);
     set_item_dialog->exec();
     delete set_item_dialog;
 

@@ -59,6 +59,19 @@ public:
     uint32_t getTime();
     uint16_t* getItem(ItemMode mode, int emplacement);
 
+    uint8_t getTypeEquipment(int emplacement);
+    /*
+    uint8_t getSlotOrUpgradeNumber(int emplacement);
+    uint16_t getIdEquipment(int emplacement);
+    uint8_t getFirstSkillCharmID(int emplacement);
+    uint8_t getFirstSkillCharmPoint(int emplacement);
+    uint8_t getSecondSkillCharmID(int emplacement);
+    uint8_t getSecondSkillCharmPoint(int emplacement);
+    uint16_t getFirstDeco(int emplacement);
+    uint16_t getSecondDeco(int emplacement);
+    uint16_t getThirdDeco(int emplacement);
+*/
+
 
     void setSex(bool new_sex);
     void setName(std::string new_name);

@@ -35,6 +35,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_vLayoutLeft->addWidget(m_item_box);
     connect(m_item_box, SIGNAL(clicked(bool)), this, SLOT(itemBoxWindow()));
 
+    m_eq_box = new QPushButton(QString("Equipment Box"), m_mainWidget);
+    m_eq_box->setEnabled(false);
+    m_vLayoutLeft->addWidget(m_eq_box);
+    connect(m_eq_box, SIGNAL(clicked(bool)), this, SLOT(eqBoxWindow()));
+
     //Boutons à droite
     m_load_file = new QPushButton("Load file", m_mainWidget);
     m_load_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/load.ico"));
@@ -78,6 +83,7 @@ void MainWindow::lireDonnees()
         //on autorise l'accès aux bouttons
         m_character->setEnabled(true);
         m_inventory->setEnabled(true);
+        m_eq_box->setEnabled(true);
         m_pouch->setEnabled(true);
         m_item_box->setEnabled(true);
         m_save_file->setEnabled(true);
@@ -133,6 +139,13 @@ void MainWindow::optionWindow()
     delete m_ow;
 }
 
+void MainWindow::eqBoxWindow()
+{
+    m_ebw->move(this->pos());
+    m_ebw->activateWindow();
+    m_ebw->show();
+}
+
 void MainWindow::loadWindowsAndDatabases()
 {
     QString langue;
@@ -143,7 +156,8 @@ void MainWindow::loadWindowsAndDatabases()
         m_character->setText("Personnage");
         m_inventory->setText("Bourse Épéiste");
         m_pouch->setText("Bourse Artilleur");
-        m_item_box->setText("Boite à Objet");
+        m_item_box->setText("Boite à objet");
+        m_eq_box->setText("Boite d'équipement");
         m_save_file->setText("Sauvegarder Fichier");
         m_load_file->setText("Charger Fichier");
         break;
@@ -153,6 +167,7 @@ void MainWindow::loadWindowsAndDatabases()
         m_inventory->setText("Inventory");
         m_pouch->setText("Pouch");
         m_item_box->setText("Item Box");
+        m_eq_box->setText("Equipment Box");
         m_save_file->setText("Save file");
         m_load_file->setText("Load file");
         break;
@@ -166,6 +181,7 @@ void MainWindow::loadWindowsAndDatabases()
         delete m_ibw;
         delete m_iw;
         delete m_pw;
+        delete m_ebw;
 
         Database *db_item = new Database(
             QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/item.txt").arg(langue).toStdString()
@@ -176,7 +192,8 @@ void MainWindow::loadWindowsAndDatabases()
 
         m_cw = new CharacterWindow(m_sdm, db_sex, this);
         m_ibw = new ItemBoxWindow(m_sdm, db_item, this);
-        m_iw = new InventoryPouchWindow(m_sdm, db_item, this, SaveDataManager::ItemMode::INVENTORY);
-        m_pw = new InventoryPouchWindow(m_sdm, db_item, this, SaveDataManager::ItemMode::POUCH);
+        m_iw = new InventoryPouchWindow(m_sdm, db_item, SaveDataManager::ItemMode::INVENTORY, this);
+        m_pw = new InventoryPouchWindow(m_sdm, db_item, SaveDataManager::ItemMode::POUCH, this);
+        m_ebw = new EquipmentBoxWindow(m_sdm, db_item, this);
     }
 }

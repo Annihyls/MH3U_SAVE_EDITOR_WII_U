@@ -4,7 +4,7 @@
 #include <QSignalMapper>
 
 
-InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, Database *db, QWidget *parent, SaveDataManager::ItemMode mode) :
+InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, QWidget *parent) :
     QMainWindow(parent), m_sdm(sdm), m_mode(mode), m_db(db)
 {
     m_mainLayout = new QWidget(this);
@@ -72,7 +72,7 @@ InventoryPouchWindow::~InventoryPouchWindow()
 
 void InventoryPouchWindow::changeItem(int id_emplacement)
 {
-    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, m_mode, this, id_emplacement);
+    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, m_mode, id_emplacement, this);
     set_item_dialog->exec();
     delete set_item_dialog;
 

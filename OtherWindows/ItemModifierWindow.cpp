@@ -1,7 +1,7 @@
 #include "ItemModifierWindow.hpp"
 #include <QCompleter>
 
-ItemModifierWindow::ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, QWidget *parent, int id_emplacement) :
+ItemModifierWindow::ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, int id_emplacement, QWidget *parent) :
     QDialog(parent), m_sdm(sdm), m_db(db), m_mode(mode), m_id_emplacement(id_emplacement)
 {
     m_mainLayout = new QVBoxLayout(this);

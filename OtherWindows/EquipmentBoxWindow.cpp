@@ -2,10 +2,9 @@
 
 #include <QSignalMapper>
 #include <QIcon>
-#include <stdlib.h>
 
-EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
-    QMainWindow(parent), m_sdm(sdm), m_db(db)
+EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db[], QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_db(db[NBR_OF_WEAP_TYPE])
 {
     m_mainLayout = new QWidget(this);
 
@@ -22,12 +21,12 @@ EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db, QWidg
         m_panel->addTab(wdg, QString("Panel %1").arg(i+1));
         individualPanel = new QGridLayout(wdg);
 
-
+        //200 car eq_box = 2000 car 2*64 bits = 1 équipent
         for(int j=0; j < 200; j++)
         {
             if((i * 100 + j)%2 == 0)
             {
-                id = m_sdm->getTypeEquipment(i * 100 + j);
+                id = m_sdm->getTypeEquipment(i * 200 + j);
                 m_eq_emplacement[i][j/2] = new QPushButton(wdg);
                 m_eq_emplacement[i][j/2]->setIcon
                     (
@@ -41,7 +40,7 @@ EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db, QWidg
 
                 individualPanel->addWidget(m_eq_emplacement[i][j/2], j / 20, j % 20);
 
-                signalMapper->setMapping(m_eq_emplacement[i][j/2], i * 100 + j);
+                signalMapper->setMapping(m_eq_emplacement[i][j/2], i * 200 + j);
                 connect(m_eq_emplacement[i][j/2], SIGNAL(clicked(bool)), signalMapper, SLOT(map()));
             }
 
@@ -62,7 +61,8 @@ EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db, QWidg
 EquipmentBoxWindow::~EquipmentBoxWindow()
 {
     this->m_sdm = NULL;
-    this->m_db = NULL;
+    for(int i=0; i<NBR_OF_WEAP_TYPE; i++)
+        this->m_db[i] = NULL;
 }
 
 void EquipmentBoxWindow::changeEq(int id_emplacment)

@@ -71,7 +71,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::lireDonnees()
 {
-    QString file_path = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("user (*)"));
+    QString file_path = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("user file(user1;user2;user3)"));
     if(!file_path.isEmpty())
     {
         delete m_sdm;
@@ -93,7 +93,7 @@ void MainWindow::lireDonnees()
 
 void MainWindow::ecrireDonnees()
 {
-    QString file_path = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("user (*)"));
+    QString file_path = QFileDialog::getSaveFileName(this, tr("Save File"), "", tr("user file(*)"));
     if(!file_path.isEmpty())
     {
         m_sdm->ecrire_donnees(file_path.toStdString());

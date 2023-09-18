@@ -12,13 +12,14 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QPushButton>
+#include <QStringList>
 
 class InventoryPouchWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    InventoryPouchWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, QWidget *parent = nullptr);
+    InventoryPouchWindow(SaveDataManager *sdm, QStringList itemStringList, SaveDataManager::ItemMode mode, QWidget *parent = nullptr);
     ~InventoryPouchWindow();
 
 public Q_SLOTS:
@@ -27,7 +28,7 @@ public Q_SLOTS:
 private:
     SaveDataManager *m_sdm;
     SaveDataManager::ItemMode m_mode;
-    Database *m_db;
+    QStringList m_itemStringList;
 
     QWidget *m_mainLayout;
     QVBoxLayout *m_vLayout;

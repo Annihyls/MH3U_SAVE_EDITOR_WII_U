@@ -9,7 +9,7 @@ Sword & Shield
 Hammer
 Lance
 Heavy Bowgun
-
+DUMMY
 Light Bowgun
 Long Sword
 Switch Axe

@@ -3,18 +3,20 @@
 
 #include <string>
 #include <Qstring>
+#include <QList>
+#include <QStringList>
 
 class Database
 {
 public:
-    Database(std::string file_path);
+    Database(QString langue);
     ~Database();
-    QString getElement(int i);
-    int getSize();
+    QString getElement(int id_database, int element);
+    QStringList getDatabase(int id_database);
 
 private:
-    QString *m_strTab;
-    int m_length;
+    QList<QStringList> m_listOfQStringList;
+    QStringList lireDonnees(std::string file_path);
 };
 
 #endif // DATABASE_HPP

@@ -11,13 +11,11 @@
 #include <QGridLayout>
 #include <QPushButton>
 
-#define NBR_OF_WEAP_TYPE 18
-
 class EquipmentBoxWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    EquipmentBoxWindow(SaveDataManager *sdm, Database *db[], QWidget *parent = nullptr);
+    EquipmentBoxWindow(SaveDataManager *sdm, Database db, QWidget *parent = nullptr);
     ~EquipmentBoxWindow();
 
 private Q_SLOTS:
@@ -25,7 +23,7 @@ private Q_SLOTS:
 
 private:
     SaveDataManager *m_sdm;
-    Database *m_db[NBR_OF_WEAP_TYPE];
+    Database m_db;
 
     QWidget *m_mainLayout;
     QTabWidget *m_panel;

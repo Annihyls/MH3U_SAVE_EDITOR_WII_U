@@ -13,6 +13,7 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QSpinBox>
+#include <QStringList>
 
 #define NUMBER_OF_BUTTON 6
 
@@ -21,12 +22,12 @@ class CharacterWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    CharacterWindow(SaveDataManager *sdm, Database *db, QWidget *parent = nullptr);
+    CharacterWindow(SaveDataManager *sdm, QStringList listOfSex, QWidget *parent = nullptr);
     ~CharacterWindow();
 
 private:
     SaveDataManager *m_sdm;
-    Database *m_db;
+    QStringList m_listOfSex;
 
     QWidget *m_mainLayout;
     QVBoxLayout *m_vLayout;

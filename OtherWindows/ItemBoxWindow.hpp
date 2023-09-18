@@ -10,6 +10,7 @@
 #include <QTabWidget>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QStringList>
 
 
 class ItemBoxWindow : public QMainWindow
@@ -17,7 +18,7 @@ class ItemBoxWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent = nullptr);
+    ItemBoxWindow(SaveDataManager *sdm, QStringList itemStringList, QWidget *parent = nullptr);
     ~ItemBoxWindow();
 
 private Q_SLOTS:
@@ -25,7 +26,7 @@ private Q_SLOTS:
 
 private:
     SaveDataManager *m_sdm;
-    Database *m_db;
+    QStringList m_itemStringList;
 
     QWidget *m_mainLayout;
     QTabWidget *m_panel;

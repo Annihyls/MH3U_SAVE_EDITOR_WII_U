@@ -1,8 +1,8 @@
 #include "CharacterWindow.hpp"
 #include <QMessageBox>
 
-CharacterWindow::CharacterWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
-    QMainWindow(parent), m_sdm(sdm), m_db(db)
+CharacterWindow::CharacterWindow(SaveDataManager *sdm, QStringList listOfSex, QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_listOfSex(listOfSex)
 {
     m_mainLayout = new QWidget(this);
     m_vLayout = new QVBoxLayout(m_mainLayout);
@@ -47,7 +47,6 @@ CharacterWindow::CharacterWindow(SaveDataManager *sdm, Database *db, QWidget *pa
 CharacterWindow::~CharacterWindow()
 {
     this->m_sdm = NULL;
-    this->m_db = NULL;
 
     for(int i=0; i<NUMBER_OF_BUTTON; i++)
     {
@@ -61,9 +60,13 @@ void CharacterWindow::loadData()
     m_sex = new QComboBox(this);
 
     //j'ajoute les données du .txt (male et femelle ici) dans le QComboBox
-    for(int i=0; i < m_db->getSize(); i++)
+    while(!m_listOfSex.empty())
     {
-        m_sex->addItem(m_db->getElement(i));
+        if(m_listOfSex.first() != "")
+        {
+            m_sex->addItem(m_listOfSex.first());
+        }
+        m_listOfSex.removeFirst();
     }
 
     m_sex->setCurrentIndex(m_sdm->getSex()); //0 si homme, 1 si femme

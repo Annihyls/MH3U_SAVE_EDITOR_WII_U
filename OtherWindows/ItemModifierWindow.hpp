@@ -10,19 +10,19 @@
 #include <QVBoxLayout>
 #include <QSpinBox>
 #include <QLineEdit>
-
+#include <QStringList>
 
 class ItemModifierWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    ItemModifierWindow(SaveDataManager *sdm, Database *db, SaveDataManager::ItemMode mode, int id_emplacement, QWidget *parent = nullptr);
+    ItemModifierWindow(SaveDataManager *sdm, QStringList itemStringList, SaveDataManager::ItemMode mode, int id_emplacement, QWidget *parent = nullptr);
     ~ItemModifierWindow();
 
 private:
     SaveDataManager *m_sdm;
-    Database *m_db;
+    QStringList m_itemStringList;
     SaveDataManager::ItemMode m_mode;
 
     QVBoxLayout *m_mainLayout;

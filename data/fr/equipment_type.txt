@@ -9,7 +9,7 @@ Grande épée
 Marteau
 Lance
 Fusarbalète lourd
-
+DUMMY
 Fusarbalète léger
 Épée longue
 Morpho-hache

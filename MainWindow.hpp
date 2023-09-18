@@ -38,6 +38,7 @@ private Q_SLOTS:
 
 private:
     SaveDataManager *m_sdm = nullptr;
+    Database *m_db = nullptr;
 
     QVBoxLayout *m_vLayoutLeft;
     QVBoxLayout *m_vLayoutRight;

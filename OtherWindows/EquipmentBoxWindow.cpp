@@ -1,10 +1,11 @@
 #include "EquipmentBoxWindow.hpp"
+#include "EqPreviewWindow.hpp"
 
 #include <QSignalMapper>
 #include <QIcon>
 
-EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db[], QWidget *parent) :
-    QMainWindow(parent), m_sdm(sdm), m_db(db[NBR_OF_WEAP_TYPE])
+EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database db, QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_db(db)
 {
     m_mainLayout = new QWidget(this);
 
@@ -61,11 +62,20 @@ EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database *db[], QWi
 EquipmentBoxWindow::~EquipmentBoxWindow()
 {
     this->m_sdm = NULL;
-    for(int i=0; i<NBR_OF_WEAP_TYPE; i++)
-        this->m_db[i] = NULL;
 }
 
-void EquipmentBoxWindow::changeEq(int id_emplacment)
+void EquipmentBoxWindow::changeEq(int id_emplacement)
 {
-    qDebug() << "Coucou " << id_emplacment << Qt::endl;
+    EqPreviewWindow *eqPrev = new EqPreviewWindow(m_sdm, m_db, id_emplacement, this);
+    eqPrev->exec();
+    delete eqPrev;
+    uint8_t weaponType = m_sdm->getTypeEquipment(id_emplacement);
+    m_eq_emplacement[id_emplacement/200][(id_emplacement/2)%100]->setIcon
+        (
+            QIcon
+            (
+                QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/equipment_icon/%1.ico").arg(weaponType)
+                )
+            );
+
 }

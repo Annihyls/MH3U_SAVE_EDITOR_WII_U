@@ -3,8 +3,8 @@
 #include <QSignalMapper>
 #include <QIcon>
 
-ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent) :
-    QMainWindow(parent), m_sdm(sdm), m_db(db)
+ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, QStringList itemStringList, QWidget *parent) :
+    QMainWindow(parent), m_sdm(sdm), m_itemStringList(itemStringList)
 {
     m_mainLayout = new QWidget(this);
 
@@ -61,12 +61,11 @@ ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, Database *db, QWidget *parent
 ItemBoxWindow::~ItemBoxWindow()
 {
     this->m_sdm = NULL;
-    this->m_db = NULL;
 }
 
 void ItemBoxWindow::changeItem(int id_emplacement)
 {
-    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_db, SaveDataManager::ITEM_BOX, id_emplacement, this);
+    ItemModifierWindow *set_item_dialog = new ItemModifierWindow(m_sdm, m_itemStringList, SaveDataManager::ITEM_BOX, id_emplacement, this);
     set_item_dialog->exec();
     delete set_item_dialog;
 

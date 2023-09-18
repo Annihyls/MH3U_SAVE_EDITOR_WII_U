@@ -182,39 +182,14 @@ void MainWindow::loadWindowsAndDatabases()
         delete m_iw;
         delete m_pw;
         delete m_ebw;
+        delete m_db;
 
-        Database *sexDB = new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/sex.txt").arg(langue).toStdString());
-        Database *itemDB = new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/item.txt").arg(langue).toStdString());
-        Database *eqDB[] =
-        {
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/equipment_type.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/arms_armors.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/bow_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/charms.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/chest_armors.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/db_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/gl_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/gs_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/h_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/hbg_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/head_armors.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/hh_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/jewels.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/l_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/lbg_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/legs_armors.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/ls_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/sa_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/skills.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/sns_weapons.txt").arg(langue).toStdString()),
-            new Database(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/waist_armors.txt").arg(langue).toStdString())
-        };
+        m_db = new Database(langue);
 
-
-        m_cw = new CharacterWindow(m_sdm, sexDB, this);
-        m_ibw = new ItemBoxWindow(m_sdm, itemDB, this);
-        m_iw = new InventoryPouchWindow(m_sdm, itemDB, SaveDataManager::ItemMode::INVENTORY, this);
-        m_pw = new InventoryPouchWindow(m_sdm, itemDB, SaveDataManager::ItemMode::POUCH, this);
-        m_ebw = new EquipmentBoxWindow(m_sdm, eqDB, this);
+        m_cw = new CharacterWindow(m_sdm, m_db->getDatabase(22), this);
+        m_ibw = new ItemBoxWindow(m_sdm, m_db->getDatabase(0), this);
+        m_iw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(0), SaveDataManager::ItemMode::INVENTORY, this);
+        m_pw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(0), SaveDataManager::ItemMode::POUCH, this);
+        m_ebw = new EquipmentBoxWindow(m_sdm, *m_db, this);
     }
 }

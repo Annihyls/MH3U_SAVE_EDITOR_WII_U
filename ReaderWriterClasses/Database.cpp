@@ -3,9 +3,9 @@
 #include <fstream>
 #include <Qstring>
 
+
 Database::Database(QString langue)
 {
-    //TRIER LES DATABASES
     m_listOfQStringList = QList<QStringList>();
     m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/item.txt").arg(langue).toStdString()));
     m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/chest_armors.txt").arg(langue).toStdString()));

@@ -60,7 +60,6 @@ public:
     uint16_t* getItem(ItemMode mode, int emplacement);
 
     uint8_t getTypeEquipment(int emplacement);
-    /*
     uint8_t getSlotOrUpgradeNumber(int emplacement);
     uint16_t getIdEquipment(int emplacement);
     uint8_t getFirstSkillCharmID(int emplacement);
@@ -70,7 +69,6 @@ public:
     uint16_t getFirstDeco(int emplacement);
     uint16_t getSecondDeco(int emplacement);
     uint16_t getThirdDeco(int emplacement);
-*/
 
 
     void setSex(bool new_sex);

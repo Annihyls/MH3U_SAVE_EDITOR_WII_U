@@ -278,6 +278,82 @@ uint8_t SaveDataManager::getTypeEquipment(int emplacement)
     return id;
 }
 
+uint8_t SaveDataManager::getSlotOrUpgradeNumber(int emplacement)
+{
+    uint64_t equip;
+    uint8_t slotUpgrade;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    slotUpgrade = (uint8_t)(equip >> 48);
+    return slotUpgrade;
+}
+uint16_t SaveDataManager::getIdEquipment(int emplacement)
+{
+    uint64_t equip;
+    uint16_t idEq;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    idEq = (uint16_t)(equip >> 32);
+    return idEq;
+}
+uint8_t SaveDataManager::getFirstSkillCharmID(int emplacement)
+{
+    uint64_t equip;
+    uint8_t skill;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    skill = (uint8_t)(equip >> 24);
+    return skill;
+}
+uint8_t SaveDataManager::getFirstSkillCharmPoint(int emplacement)
+{
+    uint64_t equip;
+    uint8_t skill;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    skill = (uint8_t)(equip >> 16);
+    return skill;
+}
+uint8_t SaveDataManager::getSecondSkillCharmID(int emplacement)
+{
+    uint64_t equip;
+    uint8_t skill;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    skill = (uint8_t)(equip >> 8);
+    return skill;
+}
+uint8_t SaveDataManager::getSecondSkillCharmPoint(int emplacement)
+{
+    uint64_t equip;
+    uint8_t skill;
+    equip = _byteswap_uint64(this->eq_box[emplacement]);
+    skill = (uint8_t)equip;
+    return skill;
+}
+uint16_t SaveDataManager::getFirstDeco(int emplacement)
+{
+    uint64_t equip;
+    uint16_t deco;
+    //emplacement + 1 car (impair = decos, pair = equipement)
+    equip = _byteswap_uint64(this->eq_box[emplacement+1]);
+    deco = (uint16_t)(equip >> 48);
+    return deco;
+}
+uint16_t SaveDataManager::getSecondDeco(int emplacement)
+{
+    uint64_t equip;
+    uint16_t deco;
+    //emplacement + 1 car (impair = decos, pair = equipement)
+    equip = _byteswap_uint64(this->eq_box[emplacement+1]);
+    deco = (uint16_t)(equip >> 32);
+    return deco;
+}
+uint16_t SaveDataManager::getThirdDeco(int emplacement)
+{
+    uint64_t equip;
+    uint16_t deco;
+    //emplacement + 1 car (impair = decos, pair = equipement)
+    equip = _byteswap_uint64(this->eq_box[emplacement+1]);
+    deco = (uint16_t)(equip >> 16);
+    return deco;
+}
+
 
 
 void SaveDataManager::setSex(bool new_sex)

@@ -186,10 +186,10 @@ void MainWindow::loadWindowsAndDatabases()
 
         m_db = new Database(langue);
 
-        m_cw = new CharacterWindow(m_sdm, m_db->getDatabase(22), this);
-        m_ibw = new ItemBoxWindow(m_sdm, m_db->getDatabase(0), this);
-        m_iw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(0), SaveDataManager::ItemMode::INVENTORY, this);
-        m_pw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(0), SaveDataManager::ItemMode::POUCH, this);
+        m_cw = new CharacterWindow(m_sdm, m_db->getDatabase(ID_DB_SEX), this);
+        m_ibw = new ItemBoxWindow(m_sdm, m_db->getDatabase(ID_DB_ITEM), this);
+        m_iw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(ID_DB_ITEM), SaveDataManager::ItemMode::INVENTORY, this);
+        m_pw = new InventoryPouchWindow(m_sdm, m_db->getDatabase(ID_DB_ITEM), SaveDataManager::ItemMode::POUCH, this);
         m_ebw = new EquipmentBoxWindow(m_sdm, *m_db, this);
     }
 }

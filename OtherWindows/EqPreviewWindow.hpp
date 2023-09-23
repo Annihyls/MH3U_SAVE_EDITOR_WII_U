@@ -10,6 +10,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QComboBox>
+#include <QList>
+#include <QLabel>
 
 
 class EqPreviewWindow : public QDialog
@@ -24,7 +26,7 @@ private:
     Database m_db;
 
     QVBoxLayout *m_mainVLayout;
-    QHBoxLayout *m_upHLayout;
+    QVBoxLayout *m_upVLayout;
     QHBoxLayout *m_downHLayout;
 
     QComboBox *m_weaponTypeComBox;
@@ -32,8 +34,8 @@ private:
 
 
     void charmDisplay();
-    void armorDisplay();
-    void weaponDisplay();
+    void armorDisplay(uint8_t type);
+    void weaponDisplay(uint8_t type);
 };
 
 #endif // EQPREVIEWWINDOW_HPP

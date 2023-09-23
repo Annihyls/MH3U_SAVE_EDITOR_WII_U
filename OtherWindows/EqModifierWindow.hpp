@@ -1,5 +1,5 @@
-#ifndef EQPREVIEWWINDOW_HPP
-#define EQPREVIEWWINDOW_HPP
+#ifndef EQMODIFIERWINDOW_H
+#define EQMODIFIERWINDOW_H
 
 #include "../ReaderWriterClasses/SaveDataManager.hpp"
 #include "../ReaderWriterClasses/Database.hpp"
@@ -8,18 +8,20 @@
 #include <QObject>
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QComboBox>
 #include <QList>
 #include <QLabel>
 
 
-class EqPreviewWindow : public QDialog
+class EqModifierWindow : public QDialog
 {
     Q_OBJECT
 public:
-    EqPreviewWindow(SaveDataManager *sdm, Database db, int id_emplacement, QWidget *parent = nullptr);
-    ~EqPreviewWindow();
+    EqModifierWindow(SaveDataManager *sdm, Database db, int id_emplacement, QWidget *parent = nullptr);
+    ~EqModifierWindow();
+
+private Q_SLOTS:
+    void changeEquipmentType(int index);
 
 private:
     SaveDataManager *m_sdm;
@@ -27,7 +29,8 @@ private:
 
     QVBoxLayout *m_mainVLayout;
     QVBoxLayout *m_upVLayout;
-    QHBoxLayout *m_downHLayout;
+    QVBoxLayout *m_midVLayout;
+    QVBoxLayout *m_downVLayout = nullptr;
 
     QComboBox *m_weaponTypeComBox;
     int m_id_emplacement;
@@ -36,6 +39,10 @@ private:
     void charmDisplay();
     void armorDisplay(uint8_t type);
     void weaponDisplay(uint8_t type);
+
+    void charmModifierDisplay();
+    void armorModifierDisplay(uint8_t type);
+    void weaponModifierDisplay(uint8_t type);
 };
 
-#endif // EQPREVIEWWINDOW_HPP
+#endif // EQMODIFIERWINDOW_H

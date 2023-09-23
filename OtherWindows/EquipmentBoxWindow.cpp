@@ -1,5 +1,5 @@
 #include "EquipmentBoxWindow.hpp"
-#include "EqPreviewWindow.hpp"
+#include "EqModifierWindow.hpp"
 
 #include <QSignalMapper>
 #include <QIcon>
@@ -66,7 +66,7 @@ EquipmentBoxWindow::~EquipmentBoxWindow()
 
 void EquipmentBoxWindow::changeEq(int id_emplacement)
 {
-    EqPreviewWindow *eqPrev = new EqPreviewWindow(m_sdm, m_db, id_emplacement, this);
+    EqModifierWindow *eqPrev = new EqModifierWindow(m_sdm, m_db, id_emplacement, this);
     eqPrev->exec();
     delete eqPrev;
     uint8_t weaponType = m_sdm->getTypeEquipment(id_emplacement);

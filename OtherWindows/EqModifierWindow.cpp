@@ -1,13 +1,20 @@
-#include "EqPreviewWindow.hpp"
+#include "EqModifierWindow.hpp"
+#include "OtherWindows/ArmorModifierWindow.hpp"
+#include "OtherWindows/CharmModifierWindow.hpp"
+#include "OtherWindows/WeaponModifierWindow.hpp"
 #include <QLabel>
 #include <QFormLayout>
+#include <QLayoutItem>
+#include <QLineEdit>
+#include <QSpinBox>
+#include <QCompleter>
 
-EqPreviewWindow::EqPreviewWindow(SaveDataManager *sdm, Database db, int id_emplacement, QWidget *parent):
+EqModifierWindow::EqModifierWindow(SaveDataManager *sdm, Database db, int id_emplacement, QWidget *parent):
     QDialog(parent), m_sdm(sdm), m_db(db), m_id_emplacement(id_emplacement)
 {
     m_mainVLayout = new QVBoxLayout(this);
     m_upVLayout = new QVBoxLayout();
-    m_downHLayout = new QHBoxLayout();
+    m_midVLayout = new QVBoxLayout();
 
     uint8_t eq = m_sdm->getTypeEquipment(m_id_emplacement);
     //si pas d'équipement
@@ -31,28 +38,31 @@ EqPreviewWindow::EqPreviewWindow(SaveDataManager *sdm, Database db, int id_empla
     }
 
     m_weaponTypeComBox = new QComboBox(this);
-
     for(QString &str : db.getDatabase(21))
     {
         m_weaponTypeComBox->addItem(str);
     }
 
-    m_downHLayout->addWidget(new QLabel("New Type : ", this));
-    m_downHLayout->addWidget(m_weaponTypeComBox);
+    QFormLayout *formLayout = new QFormLayout();
+    formLayout->addRow(tr("&New Equipment Type : "), m_weaponTypeComBox);
+    connect(m_weaponTypeComBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeEquipmentType(int)));
+
+    m_midVLayout->addLayout(formLayout);
+
     m_mainVLayout->addLayout(m_upVLayout);
-    m_mainVLayout->addLayout(m_downHLayout);
+    m_mainVLayout->addLayout(m_midVLayout);
     setLayout(m_mainVLayout);
     setMinimumWidth(240);
-    setWindowTitle("Preview + Weapon Type Editing");
+    setWindowTitle("Modifier + Weapon Type Editing");
 
 }
 
-EqPreviewWindow::~EqPreviewWindow()
+EqModifierWindow::~EqModifierWindow()
 {
 
 }
 
-void EqPreviewWindow::charmDisplay()
+void EqModifierWindow::charmDisplay()
 {
     QFormLayout *tabFormLayout[9];
     QLabel *tabLabel[9];
@@ -93,7 +103,7 @@ void EqPreviewWindow::charmDisplay()
     tabLabel[8]->setText(m_db.getElement(ID_DB_JWL, m_sdm->getThirdDeco(m_id_emplacement)));
 
 
-    tabFormLayout[0]->addRow(tr("&Type of charm : "), tabLabel[0]);
+    tabFormLayout[0]->addRow(tr("&Type of talisman : "), tabLabel[0]);
     tabFormLayout[1]->addRow(tr("&Slots : "), tabLabel[1]);
     tabFormLayout[2]->addRow(tr("&1st skill name : "), tabLabel[2]);
     tabFormLayout[3]->addRow(tr("&1st skill points : "), tabLabel[3]);
@@ -110,7 +120,7 @@ void EqPreviewWindow::charmDisplay()
 
 }
 
-void EqPreviewWindow::armorDisplay(uint8_t type)
+void EqModifierWindow::armorDisplay(uint8_t type)
 {
     QFormLayout *tabFormLayout[5];
     QLabel *tabLabel[5];
@@ -140,7 +150,7 @@ void EqPreviewWindow::armorDisplay(uint8_t type)
     }
 }
 
-void EqPreviewWindow::weaponDisplay(uint8_t type)
+void EqModifierWindow::weaponDisplay(uint8_t type)
 {
     QFormLayout *tabFormLayout[4];
     QLabel *tabLabel[4];
@@ -168,4 +178,70 @@ void EqPreviewWindow::weaponDisplay(uint8_t type)
     }
 }
 
+void EqModifierWindow::changeEquipmentType(int index)
+{
+    if(index == 0 || index == 12)
+    {
 
+    }
+    else if(index == 6)
+    {
+        charmModifierDisplay();
+    }
+    else if(index == 1 || index == 2 || index == 3 || index == 4 || index == 5)
+    {
+        armorModifierDisplay(index);
+    }
+    else
+    {
+        weaponModifierDisplay(index);
+    }
+    this->close();
+}
+
+void EqModifierWindow::charmModifierDisplay()
+{
+    CharmModifierWindow *cmw =
+        new CharmModifierWindow(m_sdm, m_id_emplacement, m_db.getDatabase(ID_DB_CHARM), m_db.getDatabase(ID_DB_SKILL), m_db.getDatabase(ID_DB_JWL), this);
+    cmw->exec();
+    delete cmw;
+}
+
+void EqModifierWindow::armorModifierDisplay(uint8_t type)
+{
+    ArmorModifierWindow *amw =
+        new ArmorModifierWindow(m_sdm, type, m_id_emplacement, m_db.getDatabase(type), m_db.getDatabase(ID_DB_JWL), this);
+    amw->exec();
+    delete amw;
+}
+void EqModifierWindow::weaponModifierDisplay(uint8_t type)
+{
+    WeaponModifierWindow *wmw =
+        new WeaponModifierWindow(m_sdm, type, m_id_emplacement, m_db.getDatabase(type), m_db.getDatabase(ID_DB_JWL), this);
+    wmw->exec();
+    delete wmw;
+}
+
+    /*
+     * pour effacer les widgets présent dans un
+     * layout (parce que quand un BoxLayout est
+     * détruit, ses enfants ne le sont pas)
+     */
+/*
+void EqModifierWindow::clearLayout(QLayout *layout) {
+    if (layout == NULL)
+        return;
+    while(layout->count()) {
+        QLayoutItem* pItem = layout->takeAt(0);
+        if (QWidget* pWidget = pItem->widget())
+        {
+            pWidget->deleteLater();
+        }
+        else if (QLayout* pChildLayout = pItem->layout())
+        {
+            clearLayout(pChildLayout);
+            pChildLayout->deleteLater();
+        }
+    }
+}
+*/

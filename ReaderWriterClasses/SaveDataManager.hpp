@@ -79,6 +79,33 @@ public:
     void setTime(unsigned long new_time);
     void setItem(ItemMode mode, int emplacement, unsigned short id_item, unsigned short quantity);
 
+    void setWeapon(int emplacement,
+                   uint8_t typeWeapon,
+                   uint16_t idWeapon,
+                   uint16_t firstJwl,
+                   uint16_t secondJwl,
+                   uint16_t thirdJwl);
+
+    void setArmor(int emplacement,
+                   uint8_t typeArmor,
+                   uint8_t amelioration,
+                   uint16_t idArmor,
+                   uint16_t firstJwl,
+                   uint16_t secondJwl,
+                   uint16_t thirdJwl);
+
+    void setCharm(int emplacement,
+                   uint8_t typeCharm,
+                   uint8_t slot,
+                   uint16_t idCharm,
+                   uint8_t firstSkill,
+                   uint8_t firstSkillPoint,
+                   uint8_t secondSkill,
+                   uint8_t secondSkillPoint,
+                   uint16_t firstJwl,
+                   uint16_t secondJwl,
+                   uint16_t thirdJwl);
+
 
 private:
     //attributs

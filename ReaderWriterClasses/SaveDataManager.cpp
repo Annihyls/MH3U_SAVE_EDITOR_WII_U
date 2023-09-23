@@ -423,5 +423,80 @@ void SaveDataManager::setItem(ItemMode mode, int emplacement, unsigned short id,
             break;
     }
 
+}
 
+void SaveDataManager::setWeapon(int emplacement,
+                                uint8_t typeWeapon,
+                                uint16_t idWeapon,
+                                uint16_t firstJwl,
+                                uint16_t secondJwl,
+                                uint16_t thirdJwl)
+{
+    uint64_t equip = 0;
+    uint64_t jwls = 0;
+
+    equip = ((uint64_t)typeWeapon << 56)
+            | ((uint64_t)idWeapon << 32);
+
+    jwls = ((uint64_t)firstJwl << 48)
+           | ((uint64_t)secondJwl << 32)
+           | ((uint64_t)thirdJwl << 16);
+
+    this->eq_box[emplacement] = _byteswap_uint64(equip);
+    this->eq_box[emplacement+1] = _byteswap_uint64(jwls);
+
+}
+
+void SaveDataManager::setArmor(int emplacement,
+                               uint8_t typeArmor,
+                               uint8_t amelioration,
+                               uint16_t idArmor,
+                               uint16_t firstJwl,
+                               uint16_t secondJwl,
+                               uint16_t thirdJwl)
+{
+    uint64_t equip = 0;
+    uint64_t jwls = 0;
+
+    equip = ((uint64_t)typeArmor << 56)
+            | ((uint64_t)amelioration << 48)
+            | ((uint64_t)idArmor << 32);
+
+    jwls = ((uint64_t)firstJwl << 48)
+           | ((uint64_t)secondJwl << 32)
+           | ((uint64_t)thirdJwl << 16);
+
+    this->eq_box[emplacement] = _byteswap_uint64(equip);
+    this->eq_box[emplacement+1] = _byteswap_uint64(jwls);
+}
+
+void SaveDataManager::setCharm(int emplacement,
+                               uint8_t typeCharm,
+                               uint8_t slot,
+                               uint16_t idCharm,
+                               uint8_t firstSkill,
+                               uint8_t firstSkillPoint,
+                               uint8_t secondSkill,
+                               uint8_t secondSkillPoint,
+                               uint16_t firstJwl,
+                               uint16_t secondJwl,
+                               uint16_t thirdJwl)
+{
+    uint64_t equip = 0;
+    uint64_t jwls = 0;
+
+    equip = ((uint64_t)typeCharm << 56)
+            | ((uint64_t)slot << 48)
+            | ((uint64_t)idCharm << 32)
+            | ((uint64_t)firstSkill << 24)
+            | ((uint64_t)firstSkillPoint << 16)
+            | ((uint64_t)secondSkill << 8)
+            | (uint64_t)secondSkillPoint;
+
+    jwls = ((uint64_t)firstJwl << 48)
+           | ((uint64_t)secondJwl << 32)
+           | ((uint64_t)thirdJwl << 16);
+
+    this->eq_box[emplacement] = _byteswap_uint64(equip);
+    this->eq_box[emplacement+1] = _byteswap_uint64(jwls);
 }

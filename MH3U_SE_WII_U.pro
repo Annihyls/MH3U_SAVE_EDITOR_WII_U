@@ -12,13 +12,16 @@ CONFIG += c++20
 RC_ICONS = res\appico.ico
 
 SOURCES += \
+    OtherWindows/ArmorModifierWindow.cpp \
     OtherWindows/CharacterWindow.cpp \
-    OtherWindows/EqPreviewWindow.cpp \
+    OtherWindows/CharmModifierWindow.cpp \
+    OtherWindows/EqModifierWindow.cpp \
     OtherWindows/EquipmentBoxWindow.cpp \
     OtherWindows/InventoryPouchWindow.cpp \
     OtherWindows/ItemBoxWindow.cpp \
     OtherWindows/ItemModifierWindow.cpp \
     OtherWindows/Option.cpp \
+    OtherWindows/WeaponModifierWindow.cpp \
     ReaderWriterClasses/Database.cpp \
     ReaderWriterClasses/SaveDataManager.cpp \
     main.cpp \
@@ -26,13 +29,16 @@ SOURCES += \
 
 HEADERS += \
     MainWindow.hpp \
+    OtherWindows/ArmorModifierWindow.hpp \
     OtherWindows/CharacterWindow.hpp \
-    OtherWindows/EqPreviewWindow.hpp \
+    OtherWindows/CharmModifierWindow.hpp \
+    OtherWindows/EqModifierWindow.hpp \
     OtherWindows/EquipmentBoxWindow.hpp \
     OtherWindows/InventoryPouchWindow.hpp \
     OtherWindows/ItemBoxWindow.hpp \
     OtherWindows/ItemModifierWindow.hpp \
     OtherWindows/Option.hpp \
+    OtherWindows/WeaponModifierWindow.hpp \
     ReaderWriterClasses/Database.hpp \
     ReaderWriterClasses/SaveDataManager.hpp
 

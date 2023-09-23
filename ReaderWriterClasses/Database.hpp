@@ -29,6 +29,9 @@
 #define ID_DB_JWL 20
 #define ID_DB_EQTYPE 21
 #define ID_DB_SEX 22
+#define ID_DB_FACE 23
+#define ID_DB_HAIR 24
+#define ID_DB_VOICE 25
 
 class Database
 {

@@ -30,6 +30,9 @@ Database::Database(QString langue)
     m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/jewels.txt").arg(langue).toStdString()));
     m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/equipment_type.txt").arg(langue).toStdString()));
     m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/sex.txt").arg(langue).toStdString()));
+    m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/faces.txt").arg(langue).toStdString()));
+    m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/hairs.txt").arg(langue).toStdString()));
+    m_listOfQStringList.push_back(lireDonnees(QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/data/%1/voices.txt").arg(langue).toStdString()));
 }
 
 Database::~Database()

@@ -9,6 +9,15 @@
 #define POSITION_BYTE_SEX 40
 #define SIZE_SEX 1  //octets
 
+#define POSITION_BYTE_FACE 0x29
+#define SIZE_FACE 1  //octets
+
+#define POSITION_BYTE_HAIR 0x2a
+#define SIZE_HAIR 1  //octets
+
+#define POSITION_BYTE_VOICE 0xcf
+#define SIZE_VOICE 1  //octets
+
 #define POSITION_BYTE_NAME 43
 #define SIZE_NAME 10 //octets
 
@@ -52,6 +61,9 @@ public:
     void ecrire_donnees(std::string file_path);
 
     uint8_t getSex();
+    uint8_t getFace();
+    uint8_t getHair();
+    uint8_t getVoice();
     uint8_t* getName();
     uint16_t getHR();
     uint32_t getArgent();
@@ -72,6 +84,9 @@ public:
 
 
     void setSex(bool new_sex);
+    void setFace(uint8_t new_face);
+    void setHair(uint8_t new_hair);
+    void setVoice(uint8_t new_voice);
     void setName(std::string new_name);
     void setHR(unsigned short new_hr);
     void setArgent(unsigned long argent);
@@ -111,6 +126,9 @@ private:
     //attributs
     uint8_t savefile[SIZE_USER_FILE];
     uint8_t sex;                        //1 octet
+    uint8_t face;                        //1 octet
+    uint8_t hair;                        //1 octet
+    uint8_t voice;                       //1 octet
     uint8_t name[SIZE_NAME];            //10 octets
     uint16_t hr;                        //2 octets
     uint32_t argent;                    //4 octets

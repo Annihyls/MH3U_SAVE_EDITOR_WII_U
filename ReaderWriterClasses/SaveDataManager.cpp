@@ -42,6 +42,12 @@ void SaveDataManager::lire_donnees(std::string file_path)
     ss.seekg(POSITION_BYTE_SEX, ss.beg);
     ss.read((char*)&this->sex, SIZE_SEX);
 
+    ss.seekg(POSITION_BYTE_FACE, ss.beg);
+    ss.read((char*)&this->face, SIZE_FACE);
+
+    ss.seekg(POSITION_BYTE_HAIR, ss.beg);
+    ss.read((char*)&this->hair, SIZE_HAIR);
+
     ss.seekg(POSITION_BYTE_NAME, ss.beg);
     ss.read((char*)&this->name, SIZE_NAME);
 
@@ -53,6 +59,9 @@ void SaveDataManager::lire_donnees(std::string file_path)
 
     ss.seekg(POSITION_BYTE_TIME, ss.beg);
     ss.read((char*)&this->time, SIZE_TIME);
+
+    ss.seekg(POSITION_BYTE_VOICE, ss.beg);
+    ss.read((char*)&this->voice, SIZE_VOICE);
 
     //quand il y a trop de données, on les lis petit-à-petit
     ss.seekg(POSITION_BYTE_INVENTORY, ss.beg);
@@ -109,7 +118,25 @@ void SaveDataManager::ecrire_donnees(std::string file_path)
     ss.write((char*)&this->sex, SIZE_SEX);
 
     //on skip jusqu'au prochaines choses à modifier.
-    for (int i = POSITION_BYTE_SEX + SIZE_SEX; i < POSITION_BYTE_NAME; i++)
+    for (int i = POSITION_BYTE_SEX + SIZE_SEX; i < POSITION_BYTE_FACE; i++)
+    {
+        ss.write((char*)&this->savefile[i], sizeof(uint8_t));
+    }
+
+    //pour changer l'octet du visage
+    ss.write((char*)&this->face, SIZE_FACE);
+
+    //on skip jusqu'au prochaines choses à modifier.
+    for (int i = POSITION_BYTE_FACE + SIZE_FACE; i < POSITION_BYTE_HAIR; i++)
+    {
+        ss.write((char*)&this->savefile[i], sizeof(uint8_t));
+    }
+
+    //pour changer l'octet du visage
+    ss.write((char*)&this->hair, SIZE_HAIR);
+
+    //on skip jusqu'au prochaines choses à modifier.
+    for (int i = POSITION_BYTE_HAIR + SIZE_HAIR; i < POSITION_BYTE_NAME; i++)
     {
         ss.write((char*)&this->savefile[i], sizeof(uint8_t));
     }
@@ -133,7 +160,16 @@ void SaveDataManager::ecrire_donnees(std::string file_path)
     //j'écris le temps
     ss.write((char*)&this->time, SIZE_TIME);
 
-    for (int i = POSITION_BYTE_TIME + SIZE_TIME; i < POSITION_BYTE_INVENTORY; i++)
+    for (int i = POSITION_BYTE_TIME + SIZE_TIME; i < POSITION_BYTE_VOICE; i++)
+    {
+        ss.write((char*)&this->savefile[i], sizeof(uint8_t));
+    }
+
+    //pour changer l'octet du visage
+    ss.write((char*)&this->voice, SIZE_VOICE);
+
+    //on skip jusqu'au prochaines choses à modifier.
+    for (int i = POSITION_BYTE_VOICE + SIZE_VOICE; i < POSITION_BYTE_INVENTORY; i++)
     {
         ss.write((char*)&this->savefile[i], sizeof(uint8_t));
     }
@@ -215,6 +251,21 @@ uint8_t SaveDataManager::getSex()
     return this->sex;
 }
 
+uint8_t SaveDataManager::getFace()
+{
+    return this->face;
+}
+
+uint8_t SaveDataManager::getHair()
+{
+    return this->hair;
+}
+
+uint8_t SaveDataManager::getVoice()
+{
+    return this->voice;
+}
+
 uint8_t* SaveDataManager::getName()
 {
     return this->name;
@@ -248,7 +299,7 @@ uint16_t* SaveDataManager::getItem(ItemMode mode, int emplacement)
      * de l'objet, et la seconde contient
      * la quantité de cet objet
      */
-    uint32_t item;
+    uint32_t item = 0;
     switch(mode)
     {
     case INVENTORY:
@@ -362,6 +413,21 @@ void SaveDataManager::setSex(bool new_sex)
         this->sex = 0x00;
     else
         this->sex = 0x01;
+}
+
+void SaveDataManager::setFace(uint8_t new_face)
+{
+    this->face = new_face;
+}
+
+void SaveDataManager::setHair(uint8_t new_hair)
+{
+    this->hair = new_hair;
+}
+
+void SaveDataManager::setVoice(uint8_t new_voice)
+{
+    this->voice = new_voice;
 }
 
 void SaveDataManager::setName(std::string new_name)

@@ -88,11 +88,11 @@ public:
     void setHair(uint8_t new_hair);
     void setVoice(uint8_t new_voice);
     void setName(std::string new_name);
-    void setHR(unsigned short new_hr);
-    void setArgent(unsigned long argent);
-    void setRessource(unsigned long ressource);
-    void setTime(unsigned long new_time);
-    void setItem(ItemMode mode, int emplacement, unsigned short id_item, unsigned short quantity);
+    void setHR(uint16_t new_hr);
+    void setArgent(uint32_t argent);
+    void setRessource(uint32_t ressource);
+    void setTime(uint32_t new_time);
+    void setItem(ItemMode mode, int emplacement, uint16_t id_item, uint16_t quantity);
 
     void setWeapon(int emplacement,
                    uint8_t typeWeapon,

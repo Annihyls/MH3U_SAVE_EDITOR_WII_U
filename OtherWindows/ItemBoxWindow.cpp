@@ -31,7 +31,7 @@ ItemBoxWindow::ItemBoxWindow(SaveDataManager *sdm, QStringList itemStringList, Q
             (
                 QIcon
                 (
-                    QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/item_icon/%1.ico").arg(item[0])
+                    QString(":/itemicons/res/item_icon/%1.ico").arg(item[0])
                 )
             );
             m_item_emplacement[i][j]->setFixedHeight(35);
@@ -75,7 +75,7 @@ void ItemBoxWindow::changeItem(int id_emplacement)
     (
         QIcon
         (
-            QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/item_icon/%1.ico").arg(item[0])
+            QString(":/itemicons/res/item_icon/%1.ico").arg(item[0])
         )
     );
     m_item_emplacement[id_emplacement/100][id_emplacement%100]->setText(QString("x%1").arg(item[1]));

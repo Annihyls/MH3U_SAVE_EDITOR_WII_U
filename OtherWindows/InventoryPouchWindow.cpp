@@ -44,7 +44,7 @@ InventoryPouchWindow::InventoryPouchWindow(SaveDataManager *sdm, QStringList ite
             (
                 QIcon
                 (
-                    QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/item_icon/%1.ico").arg(item[0])
+                    QString(":/itemicons/res/item_icon/%1.ico").arg(item[0])
                     )
                 );
 
@@ -81,7 +81,7 @@ void InventoryPouchWindow::changeItem(int id_emplacement)
         (
             QIcon
             (
-                QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/item_icon/%1.ico").arg(item[0])
+                QString(":/itemicons/res/item_icon/%1.ico").arg(item[0])
                 )
             );
     m_slotItem[id_emplacement/8][id_emplacement%8]->setText(QString("x%1").arg(item[1]));

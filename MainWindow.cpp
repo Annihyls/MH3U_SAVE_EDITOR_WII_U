@@ -42,12 +42,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Boutons à droite
     m_load_file = new QPushButton("Load file", m_mainWidget);
-    m_load_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/load.ico"));
+    m_load_file->setIcon(QIcon(":/mainicons/res/load.ico"));
     connect(m_load_file, SIGNAL(clicked(bool)), this, SLOT(lireDonnees()));
     m_vLayoutRight->addWidget(m_load_file);
 
     m_save_file = new QPushButton("Save file", m_mainWidget);
-    m_save_file->setIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/save.ico"));
+    m_save_file->setIcon(QIcon(":/mainicons/res/save.ico"));
     m_save_file->setEnabled(false);
     connect(m_save_file, SIGNAL(clicked(bool)), this, SLOT(ecrireDonnees()));
     m_vLayoutRight->addWidget(m_save_file);
@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_mainWidget);
     setMinimumWidth(320);
     setMinimumHeight(120);
-    setWindowIcon(QIcon("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/appico.ico"));
+    setWindowIcon(QIcon(":/mainicons/res/appico.ico"));
 
 }
 
@@ -177,12 +177,12 @@ void MainWindow::loadWindowsAndDatabases()
     //m_sdm ne doit pas être null !!!
     if(m_sdm != nullptr)
     {
+        delete m_db;
         delete m_cw;
         delete m_ibw;
         delete m_iw;
         delete m_pw;
         delete m_ebw;
-        delete m_db;
 
         m_db = new Database(langue);
 

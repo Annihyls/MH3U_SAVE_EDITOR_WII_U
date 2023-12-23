@@ -445,31 +445,31 @@ void SaveDataManager::setName(std::string new_name)
     }
 }
 
-void SaveDataManager::setHR(unsigned short new_hr)
+void SaveDataManager::setHR(uint16_t new_hr)
 {
     //pour changer l'endianness des bits (intrin.h)
     this->hr = _byteswap_ushort(new_hr);
 }
 
-void SaveDataManager::setArgent(unsigned long new_money)
+void SaveDataManager::setArgent(uint32_t new_money)
 {
     //pour changer l'endianness des bits (intrin.h)
     this->argent = _byteswap_ulong(new_money);
 }
 
-void SaveDataManager::setRessource(unsigned long new_ressource)
+void SaveDataManager::setRessource(uint32_t new_ressource)
 {
     //pour changer l'endianness des bits (intrin.h)
     this->ressource = _byteswap_ulong(new_ressource);
 }
 
-void SaveDataManager::setTime(unsigned long new_time)
+void SaveDataManager::setTime(uint32_t new_time)
 {
     //pour changer l'endianness des bits (intrin.h)
     this->time = _byteswap_ulong(new_time);
 }
 
-void SaveDataManager::setItem(ItemMode mode, int emplacement, unsigned short id, unsigned short quantity)
+void SaveDataManager::setItem(ItemMode mode, int emplacement, uint16_t id, uint16_t quantity)
 {
     uint32_t item = 0;
     //pour concaténer id (uint16) et quantity(uint16) en un uint32

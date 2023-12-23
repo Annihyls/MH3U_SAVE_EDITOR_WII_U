@@ -33,7 +33,7 @@ EquipmentBoxWindow::EquipmentBoxWindow(SaveDataManager *sdm, Database db, QWidge
                     (
                         QIcon
                         (
-                            QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/equipment_icon/%1.ico").arg(id)
+                            QString(":/equipicons/res/equipment_icon/%1.ico").arg(id)
                             )
                         );
                 m_eq_emplacement[i][j/2]->setFixedHeight(35);
@@ -74,7 +74,7 @@ void EquipmentBoxWindow::changeEq(int id_emplacement)
         (
             QIcon
             (
-                QString("C:/Users/vince/Desktop/QTtest/MH3U_SE_WII_U/res/equipment_icon/%1.ico").arg(weaponType)
+                QString(":/equipicons/res/equipment_icon/%1.ico").arg(weaponType)
                 )
             );
 
